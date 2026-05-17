@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  patient-api:
+    build:
+      context: ./patient-api
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"
+    environment:
+      - FLASK_ENV=development
+      - DB_PATH=/data/patients.db
+    volumes:
+      - patient-data:/data
+    networks:
+      - ehr-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/patients"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  billing-service:
+    build:
+      context: ./billing-service
+      dockerfile: Dockerfile
+    ports:
+      - "5002:5002"
+    environment:
+      - FLASK_ENV=development
+      - PATIENT_API_URL=http://patient-api:5001
+      - CACHE_FILE=/data/claims_cache.json
+    volumes:
+      - billing-data:/data
+    networks:
+      - ehr-network
+    depends_on:
+      - patient-api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5002/claims"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  audit-logger:
+    build:
+      context: ./audit-logger
+      dockerfile: Dockerfile
+    ports:
+      - "5003:5003"
+    environment:
+      - FLASK_ENV=development
+      - AUDIT_LOG_FILE=/data/audit_events.log
+    volumes:
+      - audit-data:/data
+    networks:
+      - ehr-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5003/logs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  patient-data:
+  billing-data:
+  audit-data:
+
+networks:
+  ehr-network:
+    driver: bridge
+
+# Made with Bob

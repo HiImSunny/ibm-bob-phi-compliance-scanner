@@ -1,0 +1,11 @@
+﻿__pycache__/
+*.pyc
+*.pyo
+*.db
+*.log
+*.json.bak
+bob_sessions/
+.env
+venv/
+.venv/
+node_modules/

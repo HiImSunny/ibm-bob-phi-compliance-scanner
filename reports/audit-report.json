@@ -1,0 +1,2906 @@
+{
+  "scan_timestamp": "2026-05-17T14:43:54.644926",
+  "repository": "D:\\Code Project\\Python Coding\\IBM Bob Hackathon\\ehr-demo",
+  "scanned_files": 28,
+  "total_violations": 285,
+  "phi_flow": {
+    "root": [
+      "IP",
+      "DOB",
+      "EMAIL",
+      "PHONE",
+      "ADDRESS",
+      "DIAGNOSIS",
+      "SSN"
+    ],
+    "audit-logger": [
+      "NAME",
+      "IP",
+      "MRN",
+      "ADDRESS",
+      "SSN"
+    ],
+    "billing-service": [
+      "NAME",
+      "IP",
+      "DOB",
+      "MRN",
+      "DIAGNOSIS",
+      "SSN"
+    ],
+    "patient-api": [
+      "NAME",
+      "IP",
+      "DOB",
+      "MRN",
+      "EMAIL",
+      "PHONE",
+      "ADDRESS",
+      "DIAGNOSIS",
+      "SSN"
+    ],
+    "shared": [
+      "NAME",
+      "IP",
+      "DOB",
+      "MRN",
+      "EMAIL",
+      "PHONE",
+      "ADDRESS",
+      "DIAGNOSIS",
+      "SSN"
+    ]
+  },
+  "violations": [
+    {
+      "file": "README.md",
+      "line": 22,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "| 1 | patient-api | SSN stored in plaintext DB | \u00a7164.312(a)(1) | Critical |"
+    },
+    {
+      "file": "README.md",
+      "line": 24,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "| 3 | patient-api | SSN logged in plaintext | \u00a7164.312(b) | Critical |"
+    },
+    {
+      "file": "README.md",
+      "line": 29,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "| 8 | billing-service | SSN in claim (minimum necessary) | \u00a7164.502(b) | High |"
+    },
+    {
+      "file": "README.md",
+      "line": 33,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "| 12 | audit-logger | SSN used as URL param | \u00a7164.312(e)(1) | Critical |"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 53,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Patient Name",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"AUDIT: {event['event_type']} | Patient: {event['patient_name']} | \""
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 54,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "f\"SSN: {event['patient_ssn']} | MRN: {event['patient_mrn']} | \""
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 54,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "f\"SSN: {event['patient_ssn']} | MRN: {event['patient_mrn']} | \""
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 71,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "@app.route(\"/logs/patient/<ssn>\", methods=[\"GET\"])"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 72,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "def get_patient_logs(ssn):"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 78,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "patient_events = [e for e in audit_events if e.get(\"patient_ssn\") == ssn]"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 79,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Log lookup for SSN: {ssn}, found {len(patient_events)} events\")"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 79,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Social Security Number",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Log lookup for SSN: {ssn}, found {len(patient_events)} events\")"
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 34,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"123-45-6789\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 35,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-001234\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert event['patient_ssn'] == \"123-45-6789\", \"SSN should be redacted but isn't\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 59,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"111-11-1111\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 60,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-001\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 68,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"222-22-2222\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 69,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-002\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert data[0]['patient_ssn'] == \"111-11-1111\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 87,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert data[1]['patient_ssn'] == \"222-22-2222\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 91,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "VIOLATION TEST: Verify SSN is used in URL path (exposed in server logs)"
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 98,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"999-88-7777\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 99,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-URL\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 106,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "response = client.get('/logs/patient/999-88-7777')"
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 111,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert data[0]['patient_ssn'] == \"999-88-7777\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 122,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"555-66-7777\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 123,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-EXPORT\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 141,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert export_data['events'][0]['patient_ssn'] == \"555-66-7777\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 165,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"444-55-6666\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 166,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-AUDIT\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 31,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"777-88-9999\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 32,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-FILE\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert \"777-88-9999\" in log_content, \"SSN should be redacted but is in plaintext log\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 61,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": f\"MRN-{i:03d}\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 83,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"888-99-0000\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 84,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-IP\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 106,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": \"666-77-8888\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 107,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_mrn\": \"MRN-TRAIL\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 117,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "client.get('/logs/patient/666-77-8888')"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 4,
+      "col": 0,
+      "phi_type": "HTTP_TRANSMISSION",
+      "phi_name": "Unencrypted HTTP transmission",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Critical",
+      "snippet": "* Running on http://10.161.218.8:5003"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 58,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"patient_ssn\": patient[\"ssn\"],"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 90,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Claim accessed: {claim['patient_name']} SSN:{claim['patient_ssn']}\")"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 90,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Social Security Number",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Claim accessed: {claim['patient_name']} SSN:{claim['patient_ssn']}\")"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 102,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "patient_claims = [c for c in claims if c[\"patient_ssn\"] == patient[\"ssn\"]]"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 105,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Claims lookup for SSN: {patient['ssn']} found {len(patient_claims)} claims\")"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 105,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Social Security Number",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Claims lookup for SSN: {patient['ssn']} found {len(patient_claims)} claims\")"
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 35,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"123-45-6789\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 37,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-001234\""
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 42,
+      "col": 0,
+      "phi_type": "HTTP_TRANSMISSION",
+      "phi_name": "Unencrypted HTTP transmission",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Critical",
+      "snippet": "assert url.startswith(\"http://\"), \"Should use HTTPS but uses HTTP\""
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 61,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "VIOLATION TEST: Verify SSN is stored in plaintext cache file"
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 69,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"999-88-7777\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 71,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-TEST\""
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 96,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert claim['patient_ssn'] == \"999-88-7777\", \"SSN should be encrypted but is plaintext\""
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 108,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"111-22-3333\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 110,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-001\""
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 139,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"555-66-7777\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 141,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-XYZ\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 33,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"888-99-0000\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 35,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-CROSS\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 56,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert claim['patient_ssn'] == \"888-99-0000\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 68,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"777-88-9999\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 70,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-CACHE\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 93,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert \"777-88-9999\" in content, \"SSN should be encrypted but is plaintext in cache\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 108,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"666-77-8888\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 110,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-LOG\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 129,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert \"666-77-8888\" in log_output or \"Log Test\" in log_output, \"PHI should not be in logs\""
+    },
+    {
+      "file": "docker-compose.yml",
+      "line": 31,
+      "col": 0,
+      "phi_type": "HTTP_TRANSMISSION",
+      "phi_name": "Unencrypted HTTP transmission",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Critical",
+      "snippet": "- PATIENT_API_URL=http://patient-api:5001"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 34,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "ssn TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 36,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "medical_record_number TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "VALUES (1, 'John Smith', '123-45-6789', '1985-03-15', 'MRN-001234', 'Type 2 Diabetes', '555-0123', 'john.smith@email.com', '123 Main St, Boston, MA 02101')"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "VALUES (1, 'John Smith', '123-45-6789', '1985-03-15', 'MRN-001234', 'Type 2 Diabetes', '555-0123', 'john.smith@email.com', '123 Main St, Boston, MA 02101')"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 75,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Accessed patient {patient_data['full_name']} SSN: {patient_data['ssn']}\")"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 75,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Social Security Number",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Accessed patient {patient_data['full_name']} SSN: {patient_data['ssn']}\")"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 91,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Created patient: {data['full_name']}, SSN: {data['ssn']}\")"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 91,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Social Security Number",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "logger.info(f\"Created patient: {data['full_name']}, SSN: {data['ssn']}\")"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 92,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "return jsonify({\"message\": \"Patient created\", \"ssn\": data[\"ssn\"]}), 201"
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 27,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"111-22-3333\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 29,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-INT001\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 41,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "cursor = db.execute(\"SELECT ssn, full_name FROM patients WHERE ssn = ?\", (\"111-22-3333\",))"
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert row['ssn'] == \"111-22-3333\", \"SSN should be encrypted but is plaintext\""
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 63,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert 'SSN' in log_output or 'patient' in log_output.lower()"
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 33,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert 'ssn' in patient, \"SSN should be redacted but isn't\""
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 38,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert '-' in patient['ssn'], \"SSN is in plaintext format\""
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 61,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert 'ssn' in data"
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 62,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert 'medical_record_number' in data"
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 72,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": \"999-88-7777\","
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 74,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": \"MRN-TEST001\","
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 88,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "assert 'ssn' in data"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 12,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "def mask_ssn_weak(ssn):"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 14,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "Weakly mask SSN by showing last 4 digits."
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 17,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "if not ssn or len(ssn) < 4:"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 19,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "return f\"***-**-{ssn[-4:]}\""
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 35,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "def mask_mrn_weak(mrn):"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 37,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "Weakly mask MRN by showing last 3 digits."
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 40,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "if not mrn or len(mrn) < 3:"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 41,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "return \"MRN-***\""
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 42,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "return f\"MRN-***{mrn[-3:]}\""
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 49,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "def validate_ssn(ssn):"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 51,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "Validate SSN format."
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 52,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "VIOLATION: Logs invalid SSN attempts with actual SSN value."
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 55,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "if not re.match(pattern, ssn):"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 57,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "print(f\"[VALIDATION ERROR] Invalid SSN format: {ssn}\")"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 57,
+      "col": 0,
+      "phi_type": "LOG_PHI",
+      "phi_name": "PHI in log: Social Security Number",
+      "hipaa_rule": "\u00a7164.312(b)",
+      "severity": "Critical",
+      "snippet": "print(f\"[VALIDATION ERROR] Invalid SSN format: {ssn}\")"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 68,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "'ssn', 'social_security', 'social_security_number',"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 71,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "'mrn', 'medical_record', 'medical_record_number',"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 24,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"\"\"Generate a fake SSN in format XXX-XX-XXXX\"\"\""
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 33,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "return f\"MRN-{random.randint(100000, 999999)}\""
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 64,
+      "col": 0,
+      "phi_type": "SSN",
+      "phi_name": "Social Security Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"ssn\": generate_ssn(),"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 66,
+      "col": 0,
+      "phi_type": "MRN",
+      "phi_name": "Medical Record Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Critical",
+      "snippet": "\"medical_record_number\": generate_mrn(),"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 32,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/log\", methods=[\"POST\"])"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 41,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": data.get(\"patient_name\"),  # Should be tokenized"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 53,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "logger.info(f\"AUDIT: {event['event_type']} | Patient: {event['patient_name']} | \""
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 59,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/logs\", methods=[\"GET\"])"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 71,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/logs/patient/<ssn>\", methods=[\"GET\"])"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 82,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/logs/export\", methods=[\"GET\"])"
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 33,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"Test Patient\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "assert event['patient_name'] == \"Test Patient\", \"Name should be masked but isn't\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 58,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"Patient One\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 67,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"Patient Two\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 97,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"URL Test\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 121,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"Export Test\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_audit_logger.py",
+      "line": 164,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"Audit Test\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 30,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"File Test Patient\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 59,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": f\"Patient {i}\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 82,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"IP Test\","
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 105,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": \"Audit Trail Test\","
+    },
+    {
+      "file": "audit_events.log",
+      "line": 1,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "2026-05-17 14:31:53,276 - INFO - \u001b[31m\u001b[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.\u001b[0m"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 5,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "2026-05-17 14:31:53,277 - INFO - \u001b[33mPress CTRL+C to quit\u001b[0m"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 6,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "2026-05-17 14:31:53,283 - INFO -  * Restarting with stat"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 7,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "2026-05-17 14:31:53,831 - WARNING -  * Debugger is active!"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 8,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "2026-05-17 14:31:53,842 - INFO -  * Debugger PIN: 183-652-878"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 42,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/claims\", methods=[\"POST\"])"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 54,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_name\": patient[\"full_name\"],"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 59,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"patient_dob\": patient[\"date_of_birth\"],"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 60,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": data[\"diagnosis_code\"],"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 80,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/claims/<claim_id>\", methods=[\"GET\"])"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 90,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "logger.info(f\"Claim accessed: {claim['patient_name']} SSN:{claim['patient_ssn']}\")"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 94,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/claims/patient/<int:patient_id>\", methods=[\"GET\"])"
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 34,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Test Patient\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 36,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1985-03-15\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 50,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"E11.9\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 68,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Test Patient\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 70,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1990-01-01\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 79,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"E11.9\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 107,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Test Patient\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 109,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1985-05-15\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 118,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"E11.9\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 138,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Test Patient\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 140,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1980-12-25\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 149,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"E11.9\","
+    },
+    {
+      "file": "billing-service\\tests\\test_billing_service.py",
+      "line": 165,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "assert 'patient_name' in data"
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 32,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Cross Service Test\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 34,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1975-06-20\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 36,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis\": \"Test Condition\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 44,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"E11.9\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 57,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "assert claim['patient_name'] == \"Cross Service Test\""
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 67,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Cache Test Patient\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 69,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1988-08-08\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 78,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"I10\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 107,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Log Test\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 109,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1992-03-10\","
+    },
+    {
+      "file": "billing-service\\tests\\test_integration.py",
+      "line": 118,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis_code\": \"J45.9\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 33,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "full_name TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 35,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "date_of_birth TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 37,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "diagnosis TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 38,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "phone_number TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 39,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "email TEXT,"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "VALUES (1, 'John Smith', '123-45-6789', '1985-03-15', 'MRN-001234', 'Type 2 Diabetes', '555-0123', 'john.smith@email.com', '123 Main St, Boston, MA 02101')"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "VALUES (1, 'John Smith', '123-45-6789', '1985-03-15', 'MRN-001234', 'Type 2 Diabetes', '555-0123', 'john.smith@email.com', '123 Main St, Boston, MA 02101')"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 54,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/patients\", methods=[\"GET\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 65,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/patients/<int:patient_id>\", methods=[\"GET\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 75,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "logger.info(f\"Accessed patient {patient_data['full_name']} SSN: {patient_data['ssn']}\")"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 78,
+      "col": 0,
+      "phi_type": "MISSING_AUTH",
+      "phi_name": "Endpoint missing authentication",
+      "hipaa_rule": "\u00a7164.312(d)",
+      "severity": "High",
+      "snippet": "@app.route(\"/patients\", methods=[\"POST\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 91,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "logger.info(f\"Created patient: {data['full_name']}, SSN: {data['ssn']}\")"
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 26,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Integration Test\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 28,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1985-05-15\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 30,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis\": \"Test Diagnosis\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 31,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"phone_number\": \"555-0100\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 32,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"email\": \"integration@test.com\","
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 41,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "cursor = db.execute(\"SELECT ssn, full_name FROM patients WHERE ssn = ?\", (\"111-22-3333\",))"
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "assert row['full_name'] == \"Integration Test\", \"Name should be encrypted but is plaintext\""
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 34,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "assert 'date_of_birth' in patient, \"DOB should be redacted but isn't\""
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 35,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "assert 'full_name' in patient, \"Full name should be masked but isn't\""
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 63,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "assert 'diagnosis' in data"
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 71,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": \"Test Patient\","
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 73,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": \"1990-01-01\","
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 75,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis\": \"Test Condition\","
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 76,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"phone_number\": \"555-0199\","
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 77,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"email\": \"test@example.com\","
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 22,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "def mask_name_weak(full_name):"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 27,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "if not full_name:"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 29,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "parts = full_name.split()"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 69,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "'name', 'full_name', 'first_name', 'last_name',"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 70,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "'dob', 'date_of_birth', 'birth_date',"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 72,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "'phone', 'phone_number', 'telephone',"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 73,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "'email', 'email_address',"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 75,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "'diagnosis', 'condition', 'procedure',"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 36,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"\"\"Generate a fake phone number\"\"\""
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 45,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "dob = datetime.now() - timedelta(days=days_ago)"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "return dob.strftime(\"%Y-%m-%d\")"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 59,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "first_name = random.choice(FIRST_NAMES)"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 60,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "last_name = random.choice(LAST_NAMES)"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 63,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"full_name\": f\"{first_name} {last_name}\","
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 65,
+      "col": 0,
+      "phi_type": "DOB",
+      "phi_name": "Date of Birth",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"date_of_birth\": generate_dob(),"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 67,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "\"diagnosis\": random.choice(DIAGNOSES),"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 68,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"phone_number\": generate_phone(),"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 69,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"email\": f\"{first_name.lower()}.{last_name.lower()}@email.com\","
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 69,
+      "col": 0,
+      "phi_type": "NAME",
+      "phi_name": "Patient Name",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "\"email\": f\"{first_name.lower()}.{last_name.lower()}@email.com\","
+    },
+    {
+      "file": "test_billing-service_app_py.py",
+      "line": 499,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "Violation: Diagnosis / ICD Code"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 915,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "Violation: Diagnosis / ICD Code"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 967,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Phone Number"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1019,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1123,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Phone Number"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1175,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1279,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "Violation: Diagnosis / ICD Code"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1383,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1695,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Phone Number"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1747,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1851,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "Violation: Diagnosis / ICD Code"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1955,
+      "col": 0,
+      "phi_type": "PHONE",
+      "phi_name": "Phone Number",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Phone Number"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2007,
+      "col": 0,
+      "phi_type": "EMAIL",
+      "phi_name": "Email Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "High",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2111,
+      "col": 0,
+      "phi_type": "DIAGNOSIS",
+      "phi_name": "Diagnosis / ICD Code",
+      "hipaa_rule": "\u00a7164.502(b)",
+      "severity": "High",
+      "snippet": "Violation: Diagnosis / ICD Code"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "\"ip_address\": request.remote_addr          # IP is PHI under HIPAA"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 55,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "f\"Action: {event['action']} | IP: {event['ip_address']}\")"
+    },
+    {
+      "file": "audit-logger\\app.py",
+      "line": 101,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "app.run(host=\"0.0.0.0\", port=5003, debug=True)"
+    },
+    {
+      "file": "audit-logger\\config.py",
+      "line": 32,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "HOST = \"0.0.0.0\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 94,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "assert 'ip_address' in event, \"IP address is stored (HIPAA identifier)\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 94,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "assert 'ip_address' in event, \"IP address is stored (HIPAA identifier)\""
+    },
+    {
+      "file": "audit-logger\\tests\\test_integration.py",
+      "line": 95,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "assert event['ip_address'] is not None"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 2,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "* Running on all addresses (0.0.0.0)"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 3,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "* Running on http://127.0.0.1:5003"
+    },
+    {
+      "file": "audit_events.log",
+      "line": 4,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "* Running on http://10.161.218.8:5003"
+    },
+    {
+      "file": "billing-service\\app.py",
+      "line": 109,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "app.run(host=\"0.0.0.0\", port=5002, debug=True)"
+    },
+    {
+      "file": "billing-service\\config.py",
+      "line": 23,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "HOST = \"0.0.0.0\""
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 40,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "address TEXT"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 46,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "INSERT OR IGNORE INTO patients (id, full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address)"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 47,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "VALUES (1, 'John Smith', '123-45-6789', '1985-03-15', 'MRN-001234', 'Type 2 Diabetes', '555-0123', 'john.smith@email.com', '123 Main St, Boston, MA 02101')"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 85,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "\"INSERT INTO patients (full_name, ssn, date_of_birth, medical_record_number, diagnosis, phone_number, email, address) VALUES (?, ?, ?, ?, ?, ?, ?, ?)\","
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 86,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "(data[\"full_name\"], data[\"ssn\"], data[\"date_of_birth\"], data[\"medical_record_number\"], data[\"diagnosis\"], data[\"phone_number\"], data[\"email\"], data[\"address\"])"
+    },
+    {
+      "file": "patient-api\\app.py",
+      "line": 99,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "app.run(host=\"0.0.0.0\", port=5001, debug=True)"
+    },
+    {
+      "file": "patient-api\\config.py",
+      "line": 18,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "HOST = \"0.0.0.0\""
+    },
+    {
+      "file": "patient-api\\tests\\test_integration.py",
+      "line": 33,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "\"address\": \"456 Test Ave\""
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 64,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "assert 'address' in data"
+    },
+    {
+      "file": "patient-api\\tests\\test_patient_api.py",
+      "line": 78,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "\"address\": \"123 Test St\""
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 74,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "'address', 'street', 'city', 'zip', 'zipcode',"
+    },
+    {
+      "file": "shared\\phi_utils.py",
+      "line": 76,
+      "col": 0,
+      "phi_type": "IP",
+      "phi_name": "IP Address",
+      "hipaa_rule": "\u00a7164.312(e)(1)",
+      "severity": "Medium",
+      "snippet": "'ip_address', 'ip'"
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 49,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "\"\"\"Generate a fake address\"\"\""
+    },
+    {
+      "file": "shared\\test_data.py",
+      "line": 70,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "\"address\": generate_address()"
+    },
+    {
+      "file": "test_audit-logger_app_py.py",
+      "line": 863,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: IP Address"
+    },
+    {
+      "file": "test_audit-logger_app_py.py",
+      "line": 915,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: IP Address"
+    },
+    {
+      "file": "test_audit-logger_app_py.py",
+      "line": 967,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: IP Address"
+    },
+    {
+      "file": "test_billing-service_app_py.py",
+      "line": 707,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: IP Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1019,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1175,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1383,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 1747,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2007,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Email Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2215,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Street Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2267,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Street Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2319,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Street Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2371,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Street Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2423,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: Street Address"
+    },
+    {
+      "file": "test_patient-api_app_py.py",
+      "line": 2475,
+      "col": 0,
+      "phi_type": "ADDRESS",
+      "phi_name": "Street Address",
+      "hipaa_rule": "\u00a7164.312(a)(1)",
+      "severity": "Medium",
+      "snippet": "Violation: IP Address"
+    }
+  ]
+}
